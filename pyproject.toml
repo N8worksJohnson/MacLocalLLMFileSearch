@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llmfilesearch"
+version = "0.1.0"
+description = "LLM-powered local filesystem search"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{ name = "Nate" }]
+dependencies = [
+    # Core
+    "llama-cpp-python>=0.3.0",
+    "chromadb>=1.0.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.34.0",
+    "pywebview>=5.3",
+    "pydantic>=2.0",
+    "platformdirs>=4.0",
+    "httpx>=0.28.0",
+    "psutil>=6.0",
+
+    # File extraction
+    "pymupdf>=1.25.0",
+    "python-docx>=1.1.0",
+    "openpyxl>=3.1.0",
+    "python-pptx>=1.0.0",
+    "charset-normalizer>=3.0",
+    "Pillow>=11.0",
+    "mutagen>=1.47",
+    "exifread>=3.0",
+
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "httpx",
+    "pyinstaller>=6.0",
+]
+
+[project.scripts]
+llmfilesearch = "llmfilesearch.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+llmfilesearch = ["static/**/*", "model_registry.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
